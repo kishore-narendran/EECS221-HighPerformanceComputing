@@ -1,0 +1,67 @@
+Script began: Thu Apr 21 01:45:19 PDT 2016
+Node: compute-10-3.local
+Current directory: /data/users/narendrk/hw1
+
+=== Running 5 trials of Mergesort on 10 million elements ... ===
+*** Trial 1 ***
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+
+N == 10000000
+
+Sequential: 4.53198 seconds ==> 2.20654 million keys per second
+	(Array is sorted.)
+Parallel sort: 1.62475 seconds ==> 6.15478 million keys per second
+	(Array is sorted.)
+	(Arrays are equal.)
+
+*** Trial 2 ***
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+
+N == 10000000
+
+Sequential: 4.53116 seconds ==> 2.20694 million keys per second
+	(Array is sorted.)
+Parallel sort: 1.55479 seconds ==> 6.43172 million keys per second
+	(Array is sorted.)
+	(Arrays are equal.)
+
+*** Trial 3 ***
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+
+N == 10000000
+
+Sequential: 5.37306 seconds ==> 1.86114 million keys per second
+	(Array is sorted.)
+Parallel sort: 1.72044 seconds ==> 5.81246 million keys per second
+	(Array is sorted.)
+	(Arrays are equal.)
+
+*** Trial 4 ***
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+
+N == 10000000
+
+Sequential: 5.68591 seconds ==> 1.75873 million keys per second
+	(Array is sorted.)
+Parallel sort: 1.54482 seconds ==> 6.47325 million keys per second
+	(Array is sorted.)
+	(Arrays are equal.)
+
+*** Trial 5 ***
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+
+N == 10000000
+
+Sequential: 4.54699 seconds ==> 2.19926 million keys per second
+	(Array is sorted.)
+Parallel sort: 1.55437 seconds ==> 6.43346 million keys per second
+	(Array is sorted.)
+	(Arrays are equal.)
+
+
+=== Done! ===

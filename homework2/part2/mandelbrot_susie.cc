@@ -20,17 +20,25 @@ int main (int argc, char* argv[])
   MPI_Comm_size (MPI_COMM_WORLD, &np);	/* Get number of processes */
   MPI_Get_processor_name (hostname, &namelen); /* Get hostname of node */
   printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
-  int data = rank;
-  int *rbuf = new int[np];
-  MPI_Gather(&data,1,MPI_INT,rbuf,1,MPI_INT,0,MPI_COMM_WORLD);
-  if(rank==0) 
+
+  for(int i = 1; i <= 10; i++)
   {
-     cout<<"This is the root"<<endl;
-     for(int i = 0; i < np; i++)
-     {
-	cout<<rbuf[i]<<" ";
-     }
-     cout<<endl;
+    int *rbuf = new int[np*10];
+    int *data = new int[10];
+    for(int j = 1; j <= 10; j++)
+    {
+      data[j-1] = 10*i+j;
+    }
+    MPI_Gather(&data,10,MPI_INT,rbuf,10,MPI_INT,0,MPI_COMM_WORLD);
+    if(rank==0)
+    {
+       cout<<"This is the root"<<endl;
+       for(int j = 0; j < np*10; j++)
+       {
+  	cout<<rbuf[i]<<" ";
+       }
+       cout<<endl;
+    }
   }
   MPI_Finalize();
   return 0;

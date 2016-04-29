@@ -1,0 +1,11 @@
+[compute-10-8.local:27197] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+[compute-10-8.local:27197] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_mtl_mxm: libmxm.so.2: cannot open shared object file: No such file or directory (ignored)
+[compute-10-8.local:27197] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_mtl_psm: libpsm_infinipath.so.1: cannot open shared object file: No such file or directory (ignored)
+[compute-10-8.local:27197] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_coll_fca: libfca.so.0: cannot open shared object file: No such file or directory (ignored)
+[compute-10-8.local:27197] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_coll_hcoll: libhcoll.so.0: cannot open shared object file: No such file or directory (ignored)
+[compute-10-6.local:00435] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_btl_openib: librdmacm.so.1: cannot open shared object file: No such file or directory (ignored)
+[compute-10-6.local:00435] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_mtl_mxm: libmxm.so.2: cannot open shared object file: No such file or directory (ignored)
+[compute-10-6.local:00435] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_mtl_psm: libpsm_infinipath.so.1: cannot open shared object file: No such file or directory (ignored)
+[compute-10-6.local:00435] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_coll_fca: libfca.so.0: cannot open shared object file: No such file or directory (ignored)
+[compute-10-6.local:00435] mca: base: component_find: unable to open /data/apps/mpi/openmpi-1.8.3/gcc/4.9.2/lib/openmpi/mca_coll_hcoll: libhcoll.so.0: cannot open shared object file: No such file or directory (ignored)
+Could not find/open font when opening font "arial", using internal non-scalable font

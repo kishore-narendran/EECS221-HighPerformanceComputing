@@ -20,24 +20,28 @@ int main (int argc, char* argv[])
   MPI_Comm_size (MPI_COMM_WORLD, &np);	/* Get number of processes */
   MPI_Get_processor_name (hostname, &namelen); /* Get hostname of node */
   printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
-  int *rbuf = new int[np*10];
-  int *data = new int[10];
-  for(int j = 0; j < 10; j++)
+
+  for(int i = 1; i <= 10; i++)
   {
-    data[j] = rank;
+    int *rbuf = new int[np*10];
+    int *data = new int[10];
+    for(int j = 0; j < 10; j++)
+    {
+      data[j] = rank;
+    }
+    MPI_Gather(data,10,MPI_INT,rbuf,10,MPI_INT,0,MPI_COMM_WORLD);
+    if(rank==0)
+    {
+       cout<<"This is the root"<<endl;
+       for(int j = 0; j < np*10; j++)
+       {
+  	cout<<rbuf[j]<<" ";
+       }
+       cout<<endl;
+    }
+    delete data;
+    delete rbuf;
   }
-  MPI_Gather(data,10,MPI_INT,rbuf,10,MPI_INT,0,MPI_COMM_WORLD);
-  if(rank==0)
-  {
-     cout<<"This is the root"<<endl;
-     for(int j = 0; j < np*10; j++)
-     {
-	cout<<rbuf[i]<<" ";
-     }
-     cout<<endl;
-  }
-  delete data;
-  delete rbuf;
   MPI_Finalize();
   return 0;
 }

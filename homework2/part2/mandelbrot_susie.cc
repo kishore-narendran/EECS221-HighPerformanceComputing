@@ -29,7 +29,7 @@ int main (int argc, char* argv[])
     {
       data[j-1] = 10*i+j;
     }
-    MPI_Gather(&data,10,MPI_INT,rbuf,10,MPI_INT,0,MPI_COMM_WORLD);
+    MPI_Gather(data,10,MPI_INT,rbuf,10,MPI_INT,0,MPI_COMM_WORLD);
     if(rank==0)
     {
        cout<<"This is the root"<<endl;
@@ -39,6 +39,8 @@ int main (int argc, char* argv[])
        }
        cout<<endl;
     }
+    delete data;
+    delete rbuf;
   }
   MPI_Finalize();
   return 0;

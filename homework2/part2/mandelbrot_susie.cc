@@ -25,9 +25,9 @@ int main (int argc, char* argv[])
   {
     int *rbuf = new int[np*10];
     int *data = new int[10];
-    for(int j = 1; j <= 10; j++)
+    for(int j = 0; j < 10; j++)
     {
-      data[j-1] = 10*i+rank;
+      data[j] = 10*i+rank;
     }
     MPI_Gather(data,10,MPI_INT,rbuf,10,MPI_INT,0,MPI_COMM_WORLD);
     if(rank==0)

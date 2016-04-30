@@ -92,7 +92,7 @@ auto img_view = gil::view(img);
 
   //Mandelbrot parallel code here
   float **local_mandelbrot_values = new float*[height/np];
-  y = minY + rank*(height/np)*it; //y = minY + rank*it;
+  y = minY + rank*it;
   for(int i = 0; i < height/np; ++i)
   {
     x = minX;
@@ -102,7 +102,7 @@ auto img_view = gil::view(img);
       local_mandelbrot_values[i][j] = (mandelbrot(x,y)/512.0);
       x += jt;
     }
-    y += it;//y += it*np;
+    y += it*np;
   }
 
   //Gathering
@@ -110,7 +110,6 @@ auto img_view = gil::view(img);
 
   if(rank == 0)
   {
-    /*
     int x = 0;
     int y = 0;
     for(int i = 0; i < height; i++)
@@ -123,7 +122,6 @@ auto img_view = gil::view(img);
       final_image[(height/np)*y+x] = recv_buffer[i];
       y++;
     }
-    */
 
     for (int i = 0; i < height; ++i)
     {

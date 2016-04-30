@@ -65,12 +65,8 @@ main(int argc, char* argv[]) {
   double jt = (maxX - minX)/width;
   double x, y;
 
-
-  if(rank == 0)
-  {
-    gil::rgb8_image_t img(height, width);
-    auto img_view = gil::view(img);
-  }
+gil::rgb8_image_t img(height, width);
+auto img_view = gil::view(img);
 
   /*
   //Mandelbrot serial code is here

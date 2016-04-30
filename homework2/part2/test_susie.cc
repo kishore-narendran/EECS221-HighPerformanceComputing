@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <mpi.h>
 
 #include "render.hh"
 
@@ -106,7 +107,7 @@ main(int argc, char* argv[]) {
   }
 
   //Gathering
-  MPI_Gather(local_mandelbrot_values, (height/np)*width), MPI_FLOAT, recv_buffer, (height/np)*width), MPI_FLOAT, 0, MPI_COMM_WORLD);
+  MPI_Gather(local_mandelbrot_values, (height/np)*width, MPI_FLOAT, recv_buffer, (height/np)*width, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
   if(rank == 0)
   {

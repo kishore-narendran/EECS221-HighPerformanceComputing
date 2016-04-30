@@ -128,7 +128,7 @@ main(int argc, char* argv[]) {
     {
       for (int j = 0; j < width; ++j)
       {
-        img_view(j, i) = render(final_image[j][i]);
+        img_view(j, i) = render(final_image[i][j]);
       }
     }
   }

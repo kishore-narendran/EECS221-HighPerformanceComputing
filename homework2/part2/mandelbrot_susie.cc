@@ -66,8 +66,11 @@ main(int argc, char* argv[]) {
   double x, y;
 
 
-  gil::rgb8_image_t img(height, width);
-  auto img_view = gil::view(img);
+  if(rank == 0)
+  {
+    gil::rgb8_image_t img(height, width);
+    auto img_view = gil::view(img);
+  }
 
   /*
   //Mandelbrot serial code is here
@@ -131,8 +134,8 @@ main(int argc, char* argv[]) {
         img_view(j, i) = render(final_image[i][j]);
       }
     }
+    gil::png_write_view("mandelbrot.png", const_view(img));
   }
-  gil::png_write_view("mandelbrot.png", const_view(img));
   MPI_Finalize();
   return 0;
 }

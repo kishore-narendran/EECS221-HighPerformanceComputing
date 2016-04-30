@@ -133,6 +133,8 @@ main(int argc, char* argv[]) {
     }
   }
   gil::png_write_view("mandelbrot.png", const_view(img));
+  MPI_Finalize();
+  return 0;
 }
 
 /* eof */

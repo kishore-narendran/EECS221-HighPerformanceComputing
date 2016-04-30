@@ -92,7 +92,7 @@ auto img_view = gil::view(img);
 
   //Mandelbrot parallel code here
   float **local_mandelbrot_values = new float*[height/np];
-  y = minY + rank*(height/np)*it //y = minY + rank*it;
+  y = minY + rank*(height/np)*it; //y = minY + rank*it;
   for(int i = 0; i < height/np; ++i)
   {
     x = minX;

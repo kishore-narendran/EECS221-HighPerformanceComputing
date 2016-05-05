@@ -83,7 +83,7 @@ auto img_view = gil::view(img);
 
   //Creating a receiver buffer
   float **final_image = new float *[height];
-  float **recv_buffer = new float *[height];
+  float *recv_buffer = new float [width*height];
   for(int i = 0; i < height; i++)
   {
     recv_buffer[i] = new float[width];
@@ -113,6 +113,7 @@ auto img_view = gil::view(img);
     int y = 0;
     for(int i = 0; i < height; i++)
     {
+      final_image[i] = new float[width];
       if(y == np)
       {
         y = 0;

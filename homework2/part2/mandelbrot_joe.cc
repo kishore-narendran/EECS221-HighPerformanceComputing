@@ -83,23 +83,21 @@ auto img_view = gil::view(img);
 
   //Creating a receiver buffer
   float **final_image = new float *[height];
-  float **recv_buffer = new float *[height];
+  float *recv_buffer = new float [width*height];
   for(int i = 0; i < height; i++)
   {
-    recv_buffer[i] = new float[width];
     final_image[i] = new float[width];
   }
 
   //Mandelbrot parallel code here
-  float **local_mandelbrot_values = new float*[height/np];
+  float *local_mandelbrot_values = new float[(height*width)/np];
   y = minY + rank*(height/np)*it;
   for(int i = 0; i < height/np; ++i)
   {
     x = minX;
-    local_mandelbrot_values[i] = new float[width];
     for(int j = 0; j < width; ++j)
     {
-      local_mandelbrot_values[i][j] = (mandelbrot(x,y)/512.0);
+      local_mandelbrot_values[i*width+j] = (mandelbrot(x,y)/512.0);
       x += jt;
     }
     y += it;
@@ -112,12 +110,14 @@ auto img_view = gil::view(img);
   {
     for (int i = 0; i < height; ++i)
     {
+      final_image[i] = new float[width];
       for (int j = 0; j < width; ++j)
       {
-        img_view(j, i) = render(recv_buffer[i][j]);
+        final_image[i][j] = recv_buffer[i*width+j];
+        img_view(j, i) = render(final_image[i][j]);
       }
     }
-    gil::png_write_view("mandelbrot.png", const_view(img));
+    gil::png_write_view("mandelbrot_joe.png", const_view(img));
   }
   MPI_Finalize();
   return 0;

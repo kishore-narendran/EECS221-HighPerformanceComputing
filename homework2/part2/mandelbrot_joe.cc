@@ -105,12 +105,12 @@ auto img_view = gil::view(img);
 
   //Gathering
   MPI_Gather(local_mandelbrot_values, (height/np)*width, MPI_FLOAT, recv_buffer, (height/np)*width, MPI_FLOAT, 0, MPI_COMM_WORLD);
+  MPI_Finalize();
 
   if(rank == 0)
   {
     for (int i = 0; i < height; ++i)
     {
-      final_image[i] = new float[width];
       for (int j = 0; j < width; ++j)
       {
         final_image[i][j] = recv_buffer[i*width+j];
@@ -119,7 +119,6 @@ auto img_view = gil::view(img);
     }
     gil::png_write_view("mandelbrot_joe.png", const_view(img));
   }
-  MPI_Finalize();
   return 0;
 }
 

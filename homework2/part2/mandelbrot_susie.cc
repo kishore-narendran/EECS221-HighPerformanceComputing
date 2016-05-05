@@ -112,7 +112,6 @@ auto img_view = gil::view(img);
     int y = 0;
     for(int i = 0; i < height; i++)
     {
-      final_image[i] = new float[width];
       if(y == np)
       {
         y = 0;
@@ -132,7 +131,7 @@ auto img_view = gil::view(img);
         img_view(j, i) = render(final_image[i][j]);
       }
     }
-    gil::png_write_view("mandelbrot.png", const_view(img));
+    gil::png_write_view("mandelbrot_susie.png", const_view(img));
   }
   MPI_Finalize();
   return 0;

@@ -120,7 +120,7 @@ auto img_view = gil::view(img);
       }
       for(int j = 0; j < width; j++)
       {
-        final_image[(height/np)*y+x][j] = recv_buffer[i*width][j];
+        final_image[(height/np)*y+x][j] = recv_buffer[i*width+j];
       }
       y++;
     }

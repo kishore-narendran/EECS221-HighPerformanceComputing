@@ -127,7 +127,7 @@ auto img_view = gil::view(img);
     {
       for (int j = 0; j < width; ++j)
       {
-        img_view(j, i) = render(recv_buffer[i][j]);
+        img_view(j, i) = render(final_image[i][j]);
       }
     }
     gil::png_write_view("mandelbrot.png", const_view(img));

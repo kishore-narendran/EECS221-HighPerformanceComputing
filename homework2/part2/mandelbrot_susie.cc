@@ -118,7 +118,10 @@ auto img_view = gil::view(img);
         y = 0;
         x++;
       }
-      final_image[(height/np)*y+x] = recv_buffer[i*width];
+      for(int j = 0; j < width; j++)
+      {
+        final_image[(height/np)*y+x][j] = recv_buffer[i*width][j];
+      }
       y++;
     }
 

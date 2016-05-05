@@ -86,7 +86,6 @@ auto img_view = gil::view(img);
   float *recv_buffer = new float [width*height];
   for(int i = 0; i < height; i++)
   {
-    recv_buffer[i] = new float[width];
     final_image[i] = new float[width];
   }
 

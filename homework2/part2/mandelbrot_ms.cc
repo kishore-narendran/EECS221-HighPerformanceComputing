@@ -111,6 +111,7 @@ int main (int argc, char* argv[])
       for(int j = 0; j < width; j++)
       {
         final_image[current_row][j] = recv_buffer[j+1];
+        img_view(j, current_row) = render(final_image[current_row][j]);
       }
       if(rows_sent < height)
       {
@@ -124,6 +125,7 @@ int main (int argc, char* argv[])
       }
     }
     //Rendering the image
+    /*
     for (int i = 0; i < height; ++i)
     {
       for (int j = 0; j < width; ++j)
@@ -131,6 +133,7 @@ int main (int argc, char* argv[])
         img_view(j, i) = render(final_image[i][j]);
       }
     }
+    */
     char *filename = new char[50];
     sprintf(filename, "mandelbrot_ms_%d_%dx%d.png", np, height, width);
     gil::png_write_view(filename, const_view(img));

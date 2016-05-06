@@ -102,6 +102,11 @@ int main (int argc, char* argv[])
         MPI_Send(&rows_sent, 1, MPI_INT, received_from, 0, MPI_COMM_WORLD);
         rows_sent++;
       }
+      else
+      {
+        rows_sent = height;
+        MPI_Send(&rows_sent, 1, MPI_INT, received_from, 0, MPI_COMM_WORLD);
+      }
     }
     //Rendering the image
     for (int i = 0; i < height; ++i)
@@ -119,11 +124,15 @@ int main (int argc, char* argv[])
   {
     while(true)
     {
-      //Slave receives the y value to work on
+      //Slave receives the row value to work on
       int slave_row = 0;
       double slave_y = 0;
       double slave_x = minX;
       MPI_Recv(&slave_row, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      if(slave_row == height)
+      {
+        break;
+      }
       slave_y = minY + it * slave_row;
       float *slave_mandelbrot_values = new float[width + 1];
       slave_mandelbrot_values[0] = slave_row;

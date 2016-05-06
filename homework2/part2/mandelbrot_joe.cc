@@ -138,8 +138,6 @@ auto img_view = gil::view(img);
     gil::png_write_view(filename, const_view(img));
   }
 
-
-  MPI_Finalize();
   if(rank == 0)
   {
     long double elap_time = stopwatch_stop (timer);
@@ -148,5 +146,6 @@ auto img_view = gil::view(img);
     printf("Generating image of size %dx%d using %d processes\n", height, width, np);
     printf("Mandelbrot Image Generation using Joe Block's Logic finished!\n\n");
   }
+  MPI_Finalize();
   return 0;
 }

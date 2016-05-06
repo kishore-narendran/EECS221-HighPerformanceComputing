@@ -108,42 +108,19 @@ auto img_view = gil::view(img);
 
   if(rank == 0)
   {
-    /*
-    int p = 0;
-    int q = 0;
-    for(int i = 0; i < height; i++)
-    {
-      if(q == np)
-      {
-        q = 0;
-        p++;
-      }
-      for(int j = 0; j < width; j++)
-      {
-        final_image[(np*q)+p][j] = recv_buffer[i*width+j];
-      }
-      q++;
-    }*/
-    int k = 0;
+    int process_block = 0;
     for (int i = 0; i < height; i++)
     {
-      if((i%np) == 0)
+      if(i%np == 0)
       {
-        k = (i/np);
+        process_block = (i/np);
       }
       for(int j=0; j < width; j++)
       {
-        final_image[i][j] = recv_buffer[(k*width)+j];
+        final_image[i][j] = recv_buffer[(process_block*width)+j];
+        img_view(j,i) = render(final_image[i][j]);
       }
-      k = k + height/np;
-    }
-
-    for (int i = 0; i < height; ++i)
-    {
-      for (int j = 0; j < width; ++j)
-      {
-        img_view(j, i) = render(final_image[i][j]);
-      }
+      process_block = process_block + height/np;
     }
     gil::png_write_view("mandelbrot_susie.png", const_view(img));
   }

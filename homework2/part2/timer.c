@@ -6,8 +6,8 @@
 #include "timer.h"
 
 /* =================================================== */
-/* 
- * Timing functions 
+/*
+ * Timing functions
  */
 #if !defined(HAVE_TIMER)
 #  define TIMER_DESC "gettimeofday"
@@ -51,8 +51,8 @@ stopwatch_elapsed (struct stopwatch_t* T)
 void
 stopwatch_init (void)
 {
-  printf ("Timer: %s\n", TIMER_DESC);
-  printf ("Timer resolution: ~ 1 us (?)\n");
+  //printf ("Timer: %s\n", TIMER_DESC);
+  //printf ("Timer resolution: ~ 1 us (?)\n");
   fflush (stderr);
 }
 
@@ -104,6 +104,3 @@ stopwatch_destroy (struct stopwatch_t* T)
 }
 #endif
 /* =================================================== */
-
-
-

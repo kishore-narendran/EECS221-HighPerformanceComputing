@@ -38,10 +38,13 @@ mandelbrot(double x, double y) {
 int
 main(int argc, char* argv[]) {
 
-  printf("Mandelbrot Image Generation using Joe Block's Logic started!\n");
-  stopwatch_init ();
-  struct stopwatch_t* timer = stopwatch_create ();
-  stopwatch_start (timer);
+  if(rank == 0)
+  {
+    printf("Mandelbrot Image Generation using Joe Block's Logic started!\n");
+    stopwatch_init ();
+    struct stopwatch_t* timer = stopwatch_create ();
+    stopwatch_start (timer);
+  }
 
   //MPI Initialization
   int rank=0, np=0, namelen=0;
@@ -136,10 +139,13 @@ auto img_view = gil::view(img);
 
 
   MPI_Finalize();
-  long double elap_time = stopwatch_stop (timer);
-  printf ("Time: %Lg seconds",elap_time);
-  stopwatch_destroy (timer);
-  printf("Generating image of size %dx%d using %d processes\n", height, width, np);
-  printf("Mandelbrot Image Generation using Joe Block's Logic finished!\n\n");
+  if(rank == 0)
+  {
+    long double elap_time = stopwatch_stop (timer);
+    printf ("Time: %Lg seconds",elap_time);
+    stopwatch_destroy (timer);
+    printf("Generating image of size %dx%d using %d processes\n", height, width, np);
+    printf("Mandelbrot Image Generation using Joe Block's Logic finished!\n\n");
+  }
   return 0;
 }

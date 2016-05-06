@@ -38,11 +38,12 @@ mandelbrot(double x, double y) {
 int
 main(int argc, char* argv[]) {
 
+  struct stopwatch_t* timer;
   if(rank == 0)
   {
     printf("Mandelbrot Image Generation using Joe Block's Logic started!\n");
+    timer = stopwatch_create ();
     stopwatch_init ();
-    struct stopwatch_t* timer = stopwatch_create ();
     stopwatch_start (timer);
   }
 

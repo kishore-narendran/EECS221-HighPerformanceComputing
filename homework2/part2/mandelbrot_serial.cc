@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstdlib>
 
+#include "timer.c"
 #include "render.hh"
 
 using namespace std;
@@ -33,6 +34,11 @@ mandelbrot(double x, double y) {
 
 int
 main(int argc, char* argv[]) {
+
+  struct stopwatch_t* timer;
+  timer = stopwatch_create ();
+  stopwatch_init ();
+  stopwatch_start (timer);
 
   printf("Mandelbrot Image Generation Serially started!\n");
   double minX = -2.1;
@@ -72,6 +78,9 @@ main(int argc, char* argv[]) {
   sprintf(filename, "mandelbrot_serial_%dx%d.png", height, width);
   gil::png_write_view(filename, const_view(img));
 
+  long double elap_time = stopwatch_stop (timer);
+  stopwatch_destroy (timer);
+  printf ("Time: %Lg seconds",elap_time);
   printf("Generating image of size %dx%d using one process\n", height, width);
   printf("Mandelbrot Image Generation Serially finished!\n\n");
   return 0;

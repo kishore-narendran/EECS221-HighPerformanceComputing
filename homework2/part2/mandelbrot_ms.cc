@@ -8,6 +8,8 @@
  #include <cstdlib>
  #include <mpi.h>
  #include <math.h>
+
+ #include "timer.c"
  #include "render.hh"
 
  using namespace std;
@@ -36,7 +38,11 @@
 int main (int argc, char* argv[])
 {
 
-  printf("Mandelbrot Image Generation using Master Slave Logic started!\n");
+  struct stopwatch_t* timer;
+  timer = stopwatch_create ();
+  stopwatch_init ();
+  stopwatch_start (timer);
+
   //MPI Initialization
   int rank=0, np=0, namelen=0;
   char hostname[MPI_MAX_PROCESSOR_NAME+1];
@@ -47,6 +53,10 @@ int main (int argc, char* argv[])
   MPI_Get_processor_name (hostname, &namelen); /* Get hostname of node */
   //printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
 
+  if(rank == 0)
+  {
+    printf("Mandelbrot Image Generation using Master Slave Logic started!\n");
+  }
   //Mandelbrot Code
   double minX = -2.1;
   double maxX = 0.7;
@@ -125,6 +135,9 @@ int main (int argc, char* argv[])
     sprintf(filename, "mandelbrot_ms_%d_%dx%d.png", np, height, width);
     gil::png_write_view(filename, const_view(img));
     MPI_Finalize();
+    long double elap_time = stopwatch_stop (timer);
+    stopwatch_destroy (timer);
+    printf ("Time: %Lg seconds",elap_time);
     printf("Generating image of size %dx%d using %d processes\n", height, width, np);
     printf("Mandelbrot Image Generation using Master Slave Logic finished!\n\n");
     return 0;
@@ -155,6 +168,9 @@ int main (int argc, char* argv[])
       }
       MPI_Send(slave_mandelbrot_values, width, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
     }
+    long double elap_time = stopwatch_stop (timer);
+    stopwatch_destroy (timer);
+    return 0;
   }
 }
 

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <mpi.h>
+#include <string>
 
 #include "render.hh"
 
@@ -118,7 +119,9 @@ auto img_view = gil::view(img);
         img_view(j, i) = render(final_image[i][j]);
       }
     }
-    gil::png_write_view("mandelbrot_joe.png", const_view(img));
+    char filename = new char[50];
+    sprintf(filename, "mandelbrot_joe_%d_%dx%d.png", np, height, width);
+    gil::png_write_view(filename, const_view(img));
   }
 
 

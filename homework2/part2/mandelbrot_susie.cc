@@ -124,7 +124,9 @@ auto img_view = gil::view(img);
       }
       process_block = process_block + height/np;
     }
-    gil::png_write_view("mandelbrot_susie.png", const_view(img));
+    char filename = new char[50];
+    sprintf(filename, "mandelbrot_susie_%d_%dx%d.png", np, height, width);
+    gil::png_write_view(filename, const_view(img));
   }
   MPI_Finalize();
   printf("Mandelbrot Image Generation using Susie Cyclic's Logic finished!");

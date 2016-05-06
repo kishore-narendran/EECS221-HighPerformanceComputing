@@ -117,7 +117,9 @@ int main (int argc, char* argv[])
         img_view(j, i) = render(final_image[i][j]);
       }
     }
-    gil::png_write_view("mandelbrot_ms.png", const_view(img));
+    char filename = new char[50];
+    sprintf(filename, "mandelbrot_ms_%d_%dx%d.png", np, height, width);
+    gil::png_write_view(filename, const_view(img));
     MPI_Finalize();
     printf("Mandelbrot Image Generation using Master Slave Logic finished!");
     return 0;

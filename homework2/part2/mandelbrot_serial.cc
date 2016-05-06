@@ -68,7 +68,9 @@ main(int argc, char* argv[]) {
     }
     y += it;
   }
-  gil::png_write_view("mandelbrot.png", const_view(img));
+  char filename = new char[50];
+  sprintf(filename, "mandelbrot_serial_%dx%d.png", height, width);
+  gil::png_write_view(filename, const_view(img));
 
   printf("Mandelbrot Image Generation Serially finished!");
   return 0;

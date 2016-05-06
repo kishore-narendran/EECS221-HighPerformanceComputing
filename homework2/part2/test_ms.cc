@@ -73,34 +73,48 @@ int main (int argc, char* argv[])
 
   /* Lucky you, you get to write MPI code */
 
-  int rows_received = 0, rows_sent = 0;
+  int current_row = 0, rows_sent = 0;
   float **final_image = new float *[height];
   if(rank == 0)
   {
-    for(int i = 1; i < np; i++)
+    //Master code goes here
+    while(true) //While there are rows of image work to be done
     {
-      MPI_Send(&rows_sent, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
-      y += it;
-      rows_sent += 1;
+      for(int i = 1; i < np; i++)
+      {
+        if(rows_sent == height)
+        {
+          //Marking i value for which the processing was finished
+          break;
+        }
+        //Send slaves units of work - by designating the y
+        MPI_Send(&y, 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD);
+        y += it;
+        rows_sent++;
+      }
+      for(int i = 1; i < np; i++)
+      {
+        if(current_row == height)
+        {
+          break;
+        }
+        float *recv_buffer = new float[width];
+        MPI_Recv(recv_buffer, width, MPI_FLOAT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        final_image[current_row] = new float[width];
+        for(int j = 0; j < width; j++)
+        {
+          final_image[current_row][j] = recv_buffer[j];
+        }
+        current_row++;
+        //Receive from slaves the units of work completed
+      }
+      if(rows_sent == height || current_row == height)
+      {
+        //All rows of work have been sent and received
+        break;
+      }
     }
 
-    while(rows_received < height)
-    {
-      float *recv_buffer = new float[width];
-      MPI_Status status;
-      MPI_Recv(recv_buffer, width+1, MPI_FLOAT, MPI_ANY_SOURCE, MPI_ANY_TAG, &status);
-      int received_from = status.MPI_SOURCE;
-      int current_row = (int) recv_buffer[0];
-      final_image[current_row] = new float[width];
-      for(int j = 0; j < width; j++)
-      {
-        final_image[current_row][j] = recv_buffer[j+1];
-      }
-      if(rows_sent < height)
-      {
-        MPI_Send(&rows_sent, 1, MPI_INT, received_from, 0);
-      }
-    }
     //Rendering the image
     for (int i = 0; i < height; ++i)
     {
@@ -117,18 +131,16 @@ int main (int argc, char* argv[])
   {
     while(true)
     {
+      if()
       //Slave receives the y value to work on
-      int slave_row = 0;
       double slave_y = 0;
       double slave_x = minX;
-      MPI_Recv(&slave_row, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      slave_y = minY + it * slave_row;
-      float *slave_mandelbrot_values = new float[width + 1];
-      slave_mandelbrot_values[0] = slave_row;
+      MPI_Recv(&slave_y, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      float *slave_mandelbrot_values = new float[width];
       //Slave computer values for yth row
       for(int j = 0; j < width; j++)
       {
-        slave_mandelbrot_values[j + 1] = (mandelbrot(slave_x,slave_y)/512.0);
+        slave_mandelbrot_values[j] = (mandelbrot(slave_x,slave_y)/512.0);
         slave_x += it;
       }
       MPI_Send(slave_mandelbrot_values, width, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);

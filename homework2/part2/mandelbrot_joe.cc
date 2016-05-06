@@ -38,15 +38,6 @@ mandelbrot(double x, double y) {
 int
 main(int argc, char* argv[]) {
 
-  struct stopwatch_t* timer;
-  if(rank == 0)
-  {
-    printf("Mandelbrot Image Generation using Joe Block's Logic started!\n");
-    timer = stopwatch_create ();
-    stopwatch_init ();
-    stopwatch_start (timer);
-  }
-
   //MPI Initialization
   int rank=0, np=0, namelen=0;
   char hostname[MPI_MAX_PROCESSOR_NAME+1];
@@ -57,6 +48,15 @@ main(int argc, char* argv[]) {
   MPI_Get_processor_name (hostname, &namelen); /* Get hostname of node */
   //printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
 
+  struct stopwatch_t* timer;
+  if(rank == 0)
+  {
+    printf("Mandelbrot Image Generation using Joe Block's Logic started!\n");
+    timer = stopwatch_create ();
+    stopwatch_init ();
+    stopwatch_start (timer);
+  }
+  
   //Mandelbrot Code
   double minX = -2.1;
   double maxX = 0.7;

@@ -108,20 +108,20 @@ auto img_view = gil::view(img);
 
   if(rank == 0)
   {
-    int x = 0;
-    int y = 0;
+    int p = 0;
+    int q = 0;
     for(int i = 0; i < height; i++)
     {
-      if(y == np)
+      if(q == np)
       {
-        y = 0;
-        x++;
+        q = 0;
+        p++;
       }
       for(int j = 0; j < width; j++)
       {
-        final_image[(np*y)+x][j] = recv_buffer[i*width+j];
+        final_image[(np*q)+p][j] = recv_buffer[i*width+j];
       }
-      y++;
+      q++;
     }
 
     for (int i = 0; i < height; ++i)

@@ -98,7 +98,7 @@ int main (int argc, char* argv[])
       }
       if(rows_sent < height)
       {
-        MPI_Send(&rows_sent, 1, MPI_INT, received_from, 0);
+        MPI_Send(&rows_sent, 1, MPI_INT, received_from, 0, MPI_COMM_WORLD);
       }
     }
     //Rendering the image

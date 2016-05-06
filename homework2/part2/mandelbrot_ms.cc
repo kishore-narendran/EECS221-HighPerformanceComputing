@@ -99,7 +99,7 @@ int main (int argc, char* argv[])
           break;
         }
         float *recv_buffer = new float[width];
-        MPI_Recv(recv_buffer, width, MPI_FLOAT, i, 0, MPI_COMM_WORLD);
+        MPI_Recv(recv_buffer, width, MPI_FLOAT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         final_image[current_row] = new float[width];
         for(int j = 0; j < width; j++)
         {
@@ -134,7 +134,7 @@ int main (int argc, char* argv[])
       //Slave receives the y value to work on
       double slave_y = 0;
       double slave_x = minX;
-      MPI_Recv(&slave_y, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
+      MPI_Recv(&slave_y, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       float *slave_mandelbrot_values = new float[width];
       //Slave computer values for yth row
       for(int j = 0; j < width; j++)

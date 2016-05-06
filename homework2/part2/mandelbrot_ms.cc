@@ -139,7 +139,7 @@ int main (int argc, char* argv[])
       //Slave computer values for yth row
       for(int j = 0; j < width; j++)
       {
-        local_mandelbrot_values[j] = (mandelbrot(slave_x,slave_y)/512.0);
+        slave_mandelbrot_values[j] = (mandelbrot(slave_x,slave_y)/512.0);
         slave_x += it;
       }
       MPI_Send(slave_mandelbrot_values, width, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);

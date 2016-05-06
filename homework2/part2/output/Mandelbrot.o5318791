@@ -1,0 +1,16 @@
+Mandelbrot Image Generation Serially started!
+Time: 161.961 secondsGenerating image of size 15000x15000 using one process
+Mandelbrot Image Generation Serially finished!
+
+Mandelbrot Image Generation using Joe Block's Logic started!
+Time: 45.8114 secondsGenerating image of size 15008x15008 using 16 processes
+Mandelbrot Image Generation using Joe Block's Logic finished!
+
+Mandelbrot Image Generation using Susie Cyclic's Logic started!
+Time: 31.7775 secondsGenerating image of size 15008x15008 using 16 processes
+Mandelbrot Image Generation using Joe Block's Logic finished!
+
+Mandelbrot Image Generation using Master Slave Logic started!
+Time: 29.4913 secondsGenerating image of size 15008x15008 using 16 processes
+Mandelbrot Image Generation using Master Slave Logic finished!
+

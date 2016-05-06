@@ -108,6 +108,7 @@ auto img_view = gil::view(img);
 
   if(rank == 0)
   {
+    /*
     int p = 0;
     int q = 0;
     for(int i = 0; i < height; i++)
@@ -122,6 +123,19 @@ auto img_view = gil::view(img);
         final_image[(np*q)+p][j] = recv_buffer[i*width+j];
       }
       q++;
+    }*/
+    int k = 0;
+    for (int i = 0; i < height; i++)
+    {
+      if((i%np) == 0)
+      {
+        k = (i/np);
+      }
+      for(int j=0; j < width; j++)
+      {
+        final_image[i][j] = recv_buffer[(k*width)+j];
+      }
+      k = k + height/np;
     }
 
     for (int i = 0; i < height; ++i)

@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <mpi.h>
 #include <string>
+#include <math.h>
 
 #include "render.hh"
 
@@ -36,7 +37,7 @@ mandelbrot(double x, double y) {
 int
 main(int argc, char* argv[]) {
 
-  printf("Mandelbrot Image Generation using Joe Block's Logic started!");
+  printf("Mandelbrot Image Generation using Joe Block's Logic started!\n");
   //MPI Initialization
   int rank=0, np=0, namelen=0;
   char hostname[MPI_MAX_PROCESSOR_NAME+1];
@@ -63,6 +64,10 @@ main(int argc, char* argv[]) {
     fprintf (stderr, "where <height> and <width> are the dimensions of the image.\n");
     return -1;
   }
+
+  //Rounding up value of height and width
+  height = round((float)height/(float)np) * np;
+  width = round((float)width/(float)np) * np;
 
   double it = (maxY - minY)/height;
   double jt = (maxX - minX)/width;
@@ -126,6 +131,6 @@ auto img_view = gil::view(img);
 
 
   MPI_Finalize();
-  printf("Mandelbrot Image Generation using Joe Block's Logic finished!");
+  printf("Mandelbrot Image Generation using Joe Block's Logic finished!\n\n");
   return 0;
 }

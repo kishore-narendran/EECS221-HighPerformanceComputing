@@ -7,7 +7,7 @@
  #include <iostream>
  #include <cstdlib>
  #include <mpi.h>
-
+ #include <math.h>
  #include "render.hh"
 
  using namespace std;
@@ -36,7 +36,7 @@
 int main (int argc, char* argv[])
 {
 
-  printf("Mandelbrot Image Generation using Master Slave Logic started!");
+  printf("Mandelbrot Image Generation using Master Slave Logic started!\n");
   //MPI Initialization
   int rank=0, np=0, namelen=0;
   char hostname[MPI_MAX_PROCESSOR_NAME+1];
@@ -66,6 +66,10 @@ int main (int argc, char* argv[])
     fprintf (stderr, "where <height> and <width> are the dimensions of the image.\n");
     return -1;
   }
+
+  //Rounding up value of height and width
+  height = round((float)height/(float)np) * np;
+  width = round((float)width/(float)np) * np;
 
   double it = (maxY - minY)/height;
   double jt = (maxX - minX)/width;
@@ -121,7 +125,8 @@ int main (int argc, char* argv[])
     sprintf(filename, "mandelbrot_ms_%d_%dx%d.png", np, height, width);
     gil::png_write_view(filename, const_view(img));
     MPI_Finalize();
-    printf("Mandelbrot Image Generation using Master Slave Logic finished!");
+    printf("Generating image of size %dx%d using %d processes\n", height, width, np);
+    printf("Mandelbrot Image Generation using Master Slave Logic finished!\n\n");
     return 0;
   }
   else

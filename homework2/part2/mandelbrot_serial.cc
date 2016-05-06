@@ -34,7 +34,7 @@ mandelbrot(double x, double y) {
 int
 main(int argc, char* argv[]) {
 
-  printf("Mandelbrot Image Generation Serially started!");
+  printf("Mandelbrot Image Generation Serially started!\n");
   double minX = -2.1;
   double maxX = 0.7;
   double minY = -1.25;
@@ -72,7 +72,8 @@ main(int argc, char* argv[]) {
   sprintf(filename, "mandelbrot_serial_%dx%d.png", height, width);
   gil::png_write_view(filename, const_view(img));
 
-  printf("Mandelbrot Image Generation Serially finished!");
+  printf("Generating image of size %dx%d using one process\n", height, width);
+  printf("Mandelbrot Image Generation Serially finished!\n\n");
   return 0;
 }
 

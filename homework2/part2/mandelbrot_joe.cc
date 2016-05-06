@@ -123,5 +123,3 @@ auto img_view = gil::view(img);
   MPI_Finalize();
   return 0;
 }
-
-/* eof */

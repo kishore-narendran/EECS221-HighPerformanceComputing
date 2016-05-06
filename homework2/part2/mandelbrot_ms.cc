@@ -131,6 +131,7 @@ int main (int argc, char* argv[])
       MPI_Recv(&slave_row, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       if(slave_row == height)
       {
+        MPI_Finalize();
         break;
       }
       slave_y = minY + it * slave_row;

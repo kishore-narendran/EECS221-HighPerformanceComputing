@@ -88,7 +88,7 @@ int main (int argc, char* argv[])
     {
       float *recv_buffer = new float[width];
       MPI_Status status;
-      MPI_Recv(recv_buffer, width+1, MPI_FLOAT, MPI_ANY_SOURCE, MPI_ANY_TAG, &status);
+      MPI_Recv(recv_buffer, width+1, MPI_FLOAT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
       rows_received++;
       int received_from = status.MPI_SOURCE;
       int current_row = (int) recv_buffer[0];
@@ -100,6 +100,7 @@ int main (int argc, char* argv[])
       if(rows_sent < height)
       {
         MPI_Send(&rows_sent, 1, MPI_INT, received_from, 0, MPI_COMM_WORLD);
+        rows_sent++;
       }
     }
     //Rendering the image

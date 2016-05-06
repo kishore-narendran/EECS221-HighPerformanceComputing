@@ -80,7 +80,6 @@ int main (int argc, char* argv[])
     for(int i = 1; i < np; i++)
     {
       MPI_Send(&rows_sent, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
-      y += it;
       rows_sent += 1;
     }
 

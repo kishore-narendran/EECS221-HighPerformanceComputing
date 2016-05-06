@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -N Mandelbrot-Susie
 #$ -q eecs221
-#$ -pe mpi 40
+#$ -pe mpi 32
 #$ -R y
 
 # Grid Engine Notes:
@@ -17,4 +17,4 @@ module load boost/1.57.0
 module load openmpi-1.8.3/gcc-4.9.2
 
 # Run the program
-mpirun -np 40  ./mandelbrot_susie 1000 1000
+mpirun -np 32  ./mandelbrot_susie 1000 1000

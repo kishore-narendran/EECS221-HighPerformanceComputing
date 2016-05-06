@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N Mandelbrot-Joe
+#$ -N Mandelbrot-MS
 #$ -q eecs221
 #$ -pe mpi 32
 #$ -R y

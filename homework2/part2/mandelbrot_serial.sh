@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -N Mandelbrot
 #$ -q eecs221
-#$ -pe mpi 32
+#$ -pe one-node-mpi 1
 #$ -R y
 
 # Grid Engine Notes:
@@ -17,7 +17,4 @@ module load boost/1.57.0
 module load openmpi-1.8.3/gcc-4.9.2
 
 # Run the program
-mpirun -np 32  ./mandelbrot_serial 1000 1000
-mpirun -np 32  ./mandelbrot_joe 1000 1000
-mpirun -np 32  ./mandelbrot_susie 1000 1000
-mpirun -np 32  ./mandelbrot_ms 1000 1000
+mpirun -np 10  ./mandelbrot_serial 1000 1000

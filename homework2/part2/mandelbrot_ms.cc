@@ -35,6 +35,8 @@
 
 int main (int argc, char* argv[])
 {
+
+  printf("Mandelbrot Image Generation using Master Slave Logic started!");
   //MPI Initialization
   int rank=0, np=0, namelen=0;
   char hostname[MPI_MAX_PROCESSOR_NAME+1];
@@ -43,7 +45,7 @@ int main (int argc, char* argv[])
   MPI_Comm_rank (MPI_COMM_WORLD, &rank);	/* Get process id */
   MPI_Comm_size (MPI_COMM_WORLD, &np);	/* Get number of processes */
   MPI_Get_processor_name (hostname, &namelen); /* Get hostname of node */
-  printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
+  //printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
 
   //Mandelbrot Code
   double minX = -2.1;
@@ -117,10 +119,12 @@ int main (int argc, char* argv[])
     }
     gil::png_write_view("mandelbrot_ms.png", const_view(img));
     MPI_Finalize();
+    printf("Mandelbrot Image Generation using Master Slave Logic finished!");
     return 0;
   }
   else
   {
+    //Slave logic goes here
     while(true)
     {
       //Slave receives the row value to work on
@@ -144,7 +148,6 @@ int main (int argc, char* argv[])
       }
       MPI_Send(slave_mandelbrot_values, width, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
     }
-    //Slave code goes here
   }
 }
 

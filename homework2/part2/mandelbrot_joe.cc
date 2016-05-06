@@ -34,6 +34,8 @@ mandelbrot(double x, double y) {
 
 int
 main(int argc, char* argv[]) {
+
+  printf("Mandelbrot Image Generation using Joe Block's Logic started!");
   //MPI Initialization
   int rank=0, np=0, namelen=0;
   char hostname[MPI_MAX_PROCESSOR_NAME+1];
@@ -42,7 +44,7 @@ main(int argc, char* argv[]) {
   MPI_Comm_rank (MPI_COMM_WORLD, &rank);	/* Get process id */
   MPI_Comm_size (MPI_COMM_WORLD, &np);	/* Get number of processes */
   MPI_Get_processor_name (hostname, &namelen); /* Get hostname of node */
-  printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
+  //printf ("Hello, world! [Host:%s -- Rank %d out of %d]\n", hostname, rank, np);
 
   //Mandelbrot Code
   double minX = -2.1;
@@ -121,5 +123,6 @@ auto img_view = gil::view(img);
 
 
   MPI_Finalize();
+  printf("Mandelbrot Image Generation using Joe Block's Logic finished!");
   return 0;
 }

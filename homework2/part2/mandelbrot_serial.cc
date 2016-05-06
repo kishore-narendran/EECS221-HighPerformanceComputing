@@ -68,7 +68,7 @@ main(int argc, char* argv[]) {
     }
     y += it;
   }
-  char filename = new char[50];
+  char *filename = new char[50];
   sprintf(filename, "mandelbrot_serial_%dx%d.png", height, width);
   gil::png_write_view(filename, const_view(img));
 

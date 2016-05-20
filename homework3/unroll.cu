@@ -84,10 +84,10 @@ kernel4(dtype *input, dtype *output, unsigned int n)
     if (threadIdx.x < 32)
     {
       if(n > 64) {
-        scratchUnroll[threadIdx.x] += scratchUnroll[threadIdx.x + 32];
+        scratch[threadIdx.x] += scratch[threadIdx.x + 32];
 		  }
       if(n > 32) {
-        scratchUnroll[threadIdx.x] += scratchUnroll[threadIdx.x + 16];
+        scratch[threadIdx.x] += scratch[threadIdx.x + 16];
       }
       scratch[threadIdx.x] += scratch[threadIdx.x + 8];
       scratch[threadIdx.x] += scratch[threadIdx.x + 4];

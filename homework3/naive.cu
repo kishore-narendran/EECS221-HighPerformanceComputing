@@ -67,7 +67,7 @@ kernel0 (dtype *input, dtype *output, unsigned int n)
   unsigned int i = bid * blockDim.x + threadIdx.x;
 
   if(i < n) {
-    scratch[threadIdx.x] = input[i]; 
+    scratch[threadIdx.x] = input[i];
   } else {
     scratch[threadIdx.x] = 0;
   }
@@ -85,14 +85,14 @@ kernel0 (dtype *input, dtype *output, unsigned int n)
   }
 }
 
-int 
+int
 main(int argc, char** argv)
 {
   int i;
 
   /* data structure */
   dtype *h_idata, h_odata, h_cpu;
-  dtype *d_idata, *d_odata;	
+  dtype *d_idata, *d_odata;
 
   /* timer */
   struct stopwatch_t* timer = NULL;
@@ -115,7 +115,7 @@ main(int argc, char** argv)
 
   /* naive kernel */
   whichKernel = 0;
-  getNumBlocksAndThreads (whichKernel, N, MAX_BLOCKS, MAX_THREADS, 
+  getNumBlocksAndThreads (whichKernel, N, MAX_BLOCKS, MAX_THREADS,
 			  blocks, threads);
 
   /* initialize timer */
@@ -132,10 +132,10 @@ main(int argc, char** argv)
   for(i = 0; i < N; i++) {
     h_idata[i] = drand48() / 100000;
   }
-  CUDA_CHECK_ERROR (cudaMemcpy (d_idata, h_idata, N * sizeof (dtype), 
+  CUDA_CHECK_ERROR (cudaMemcpy (d_idata, h_idata, N * sizeof (dtype),
 				cudaMemcpyHostToDevice));
 
-	
+	printf("%d",blocks,threads);
   /* ================================================== */
   /* GPU kernel */
   dim3 gb(16, ((blocks + 16 - 1) / 16), 1);
@@ -144,7 +144,7 @@ main(int argc, char** argv)
   /* warm up */
   kernel0 <<<gb, tb>>> (d_idata, d_odata, N);
   cudaThreadSynchronize ();
-	
+
   stopwatch_start (timer);
 
   /* execute kernel */
@@ -153,7 +153,7 @@ main(int argc, char** argv)
   while(s > 1) {
     threads = 0;
     blocks = 0;
-    getNumBlocksAndThreads (whichKernel, s, MAX_BLOCKS, MAX_THREADS, 
+    getNumBlocksAndThreads (whichKernel, s, MAX_BLOCKS, MAX_THREADS,
 			    blocks, threads);
 
     dim3 gb(16, (blocks + 16 - 1) / 16, 1);
@@ -170,9 +170,9 @@ main(int argc, char** argv)
 	   t_kernel_0);
   double bw = (N * sizeof(dtype)) / (t_kernel_0 * 1e9);
   fprintf (stdout, "Effective bandwidth: %.2lf GB/s\n", bw);
-	
+
   /* copy result back from GPU */
-  CUDA_CHECK_ERROR (cudaMemcpy (&h_odata, d_odata, sizeof (dtype), 
+  CUDA_CHECK_ERROR (cudaMemcpy (&h_odata, d_odata, sizeof (dtype),
 				cudaMemcpyDeviceToHost));
   /* ================================================== */
 

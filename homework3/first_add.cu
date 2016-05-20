@@ -66,9 +66,10 @@ kernel3(dtype *input, dtype *output, unsigned int n)
 
   unsigned int bid = gridDim.x * blockIdx.y + blockIdx.x;
   unsigned int i = bid * blockDim.x + threadIdx.x;
+  unsigned int halfBlockDim = n / 2;
 
   if(i < n/2) {
-    scratch[threadIdx.x] = input[2*i] + input[2*i + 1];
+    scratch[threadIdx.x] = input[i] + input[i + halfBlockDim];
   } else {
     scratch[threadIdx.x] = 0;
   }

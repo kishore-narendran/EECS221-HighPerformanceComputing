@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -N REDUCE
+#$ -N STRIDE
 #$ -q gpu
 #$ -l gpu=1
 #$ -pe gpu-node-cores 6

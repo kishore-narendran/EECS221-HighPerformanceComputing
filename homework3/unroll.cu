@@ -66,16 +66,16 @@ kernel4(dtype *g_idata, dtype *g_odata, unsigned int n)
 
     unsigned int bid = gridDim.x * blockIdx.y + blockIdx.x;
     unsigned int i = bid * blockDim.x + threadIdx.x;
-    unsigned int halfBlockDim = n / 2;
+    unsigned int halfBlockDim = n >> 1;
 
-    if(i < n/2) {
+    if(i < ( n>>1 )) {
       scratch[threadIdx.x] = input[i] + input[i + halfBlockDim];
     } else {
       scratch[threadIdx.x] = 0;
     }
     __syncthreads ();
 
-    for(unsigned int s = blockDim.x / 2; s > 32; s = s >> 1) {
+    for(unsigned int s = blockDim.x >> 1; s > 32; s = s >> 1) {
       if( threadIdx.x < s ) {
         scratch[ threadIdx.x ] += scratch[ threadIdx.x + s ];
       }
@@ -84,11 +84,8 @@ kernel4(dtype *g_idata, dtype *g_odata, unsigned int n)
 
     if (threadIdx.x < 32)
     {
-      if (n > 32)
-      {
-        scratch[threadIdx.x] += scratch[threadIdx.x + 32];
-        scratch[threadIdx.x] += scratch[threadIdx.x + 16];
-      }
+      scratch[threadIdx.x] += scratch[threadIdx.x + 32];
+      scratch[threadIdx.x] += scratch[threadIdx.x + 16];
       scratch[threadIdx.x] += scratch[threadIdx.x + 8];
       scratch[threadIdx.x] += scratch[threadIdx.x + 4];
       scratch[threadIdx.x] += scratch[threadIdx.x + 2];

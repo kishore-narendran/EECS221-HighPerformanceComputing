@@ -1,0 +1,47 @@
+Script began: Thu May 19 20:25:36 PDT 2016
+Node: compute-1-14.local
+Current directory: /data/users/narendrk/EECS221-HighPerformanceComputing/homework3
+
+=== Running 5 trials of naive ... ===
+*** Trial 1 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+32768Time to execute naive GPU reduction kernel: 0.003361 secs
+Effective bandwidth: 9.98 GB/s
+Time to execute naive CPU reduction: 0.116002 secs
+SUCCESS: GPU: 41.943962 	CPU: 41.943966
+*** Trial 2 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+32768Time to execute naive GPU reduction kernel: 0.003363 secs
+Effective bandwidth: 9.98 GB/s
+Time to execute naive CPU reduction: 0.116067 secs
+SUCCESS: GPU: 41.941586 	CPU: 41.941586
+*** Trial 3 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+32768Time to execute naive GPU reduction kernel: 0.003362 secs
+Effective bandwidth: 9.98 GB/s
+Time to execute naive CPU reduction: 0.116011 secs
+SUCCESS: GPU: 41.941586 	CPU: 41.941586
+*** Trial 4 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+32768Time to execute naive GPU reduction kernel: 0.003349 secs
+Effective bandwidth: 10.02 GB/s
+Time to execute naive CPU reduction: 0.116002 secs
+SUCCESS: GPU: 41.937550 	CPU: 41.937550
+*** Trial 5 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+32768Time to execute naive GPU reduction kernel: 0.003369 secs
+Effective bandwidth: 9.96 GB/s
+Time to execute naive CPU reduction: 0.109884 secs
+SUCCESS: GPU: 41.937550 	CPU: 41.937550
+
+=== Done! ===

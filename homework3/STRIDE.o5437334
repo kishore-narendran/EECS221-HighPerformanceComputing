@@ -1,0 +1,47 @@
+Script began: Thu May 19 20:25:56 PDT 2016
+Node: compute-1-14.local
+Current directory: /data/users/narendrk/EECS221-HighPerformanceComputing/homework3
+
+=== Running 5 trials of strided access ... ===
+*** Trial 1 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+Time to execute strided index GPU reduction kernel: 0.00221 secs
+Effective bandwidth: 15.18 GB/s
+Time to execute naive CPU reduction: 0.116113 secs
+SUCCESS: GPU: 41.944176  CPU: 41.944180
+*** Trial 2 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+Time to execute strided index GPU reduction kernel: 0.00223 secs
+Effective bandwidth: 15.05 GB/s
+Time to execute naive CPU reduction: 0.11603 secs
+SUCCESS: GPU: 41.931618  CPU: 41.931622
+*** Trial 3 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+Time to execute strided index GPU reduction kernel: 0.002218 secs
+Effective bandwidth: 15.13 GB/s
+Time to execute naive CPU reduction: 0.116015 secs
+SUCCESS: GPU: 41.931618  CPU: 41.931622
+*** Trial 4 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+Time to execute strided index GPU reduction kernel: 0.002223 secs
+Effective bandwidth: 15.09 GB/s
+Time to execute naive CPU reduction: 0.116004 secs
+SUCCESS: GPU: 41.950241  CPU: 41.950241
+*** Trial 5 ***
+N: 8388608
+Timer: gettimeofday
+Timer resolution: ~ 1 us (?)
+Time to execute strided index GPU reduction kernel: 0.002219 secs
+Effective bandwidth: 15.12 GB/s
+Time to execute naive CPU reduction: 0.116017 secs
+SUCCESS: GPU: 41.950241  CPU: 41.950241
+
+=== Done! ===

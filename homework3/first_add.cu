@@ -60,7 +60,7 @@ dtype reduce_cpu(dtype *data, int n) {
 
 
 __global__ void
-kernel3(dtype *g_idata, dtype *g_odata, unsigned int n)
+kernel3(dtype *input, dtype *output, unsigned int n)
 {
   __shared__  dtype scratch[MAX_THREADS];
 
